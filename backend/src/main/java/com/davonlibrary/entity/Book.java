@@ -75,15 +75,15 @@ public class Book extends PanacheEntity {
    * @param title the book title
    * @param isbn the ISBN
    * @param author the book author
-   * @param totalCopies the total number of copies
+   * @param totalCopies the total number of copies (must be non-negative, 0 is allowed)
    */
   public Book(String title, String isbn, Author author, int totalCopies) {
     this.title = title;
     this.isbn = isbn;
     this.author = author;
-    this.totalCopies = totalCopies;
-    this.availableCopies = totalCopies;
-    this.status = totalCopies > 0 ? BookStatus.AVAILABLE : BookStatus.UNAVAILABLE;
+    this.totalCopies = Math.max(0, totalCopies);
+    this.availableCopies = this.totalCopies;
+    this.status = this.totalCopies > 0 ? BookStatus.AVAILABLE : BookStatus.UNAVAILABLE;
   }
 
   /**
