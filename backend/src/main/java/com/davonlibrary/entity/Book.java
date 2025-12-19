@@ -66,6 +66,7 @@ public class Book extends PanacheEntity {
     this.author = author;
     this.availableCopies = 1;
     this.totalCopies = 1;
+    this.status = BookStatus.AVAILABLE;
   }
 
   /**
@@ -82,6 +83,7 @@ public class Book extends PanacheEntity {
     this.author = author;
     this.totalCopies = totalCopies;
     this.availableCopies = totalCopies;
+    this.status = totalCopies > 0 ? BookStatus.AVAILABLE : BookStatus.UNAVAILABLE;
   }
 
   /**
