@@ -76,14 +76,18 @@ public class Book extends PanacheEntity {
    * @param isbn the ISBN
    * @param author the book author
    * @param totalCopies the total number of copies (must be non-negative, 0 is allowed)
+   * @throws IllegalArgumentException if totalCopies is negative
    */
   public Book(String title, String isbn, Author author, int totalCopies) {
+    if (totalCopies < 0) {
+      throw new IllegalArgumentException("Total copies cannot be negative");
+    }
     this.title = title;
     this.isbn = isbn;
     this.author = author;
-    this.totalCopies = Math.max(0, totalCopies);
-    this.availableCopies = this.totalCopies;
-    this.status = this.totalCopies > 0 ? BookStatus.AVAILABLE : BookStatus.UNAVAILABLE;
+    this.totalCopies = totalCopies;
+    this.availableCopies = totalCopies;
+    this.status = totalCopies > 0 ? BookStatus.AVAILABLE : BookStatus.UNAVAILABLE;
   }
 
   /**
