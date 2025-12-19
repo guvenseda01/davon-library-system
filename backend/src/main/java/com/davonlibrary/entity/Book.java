@@ -56,6 +56,35 @@ public class Book extends PanacheEntity {
   public Book() {}
 
   /**
+   * Constructor with title and author (minimal information).
+   *
+   * @param title the book title
+   * @param author the book author
+   */
+  public Book(String title, Author author) {
+    this.title = title;
+    this.author = author;
+    this.availableCopies = 1;
+    this.totalCopies = 1;
+  }
+
+  /**
+   * Constructor with title, ISBN, author, and total copies.
+   *
+   * @param title the book title
+   * @param isbn the ISBN
+   * @param author the book author
+   * @param totalCopies the total number of copies
+   */
+  public Book(String title, String isbn, Author author, int totalCopies) {
+    this.title = title;
+    this.isbn = isbn;
+    this.author = author;
+    this.totalCopies = totalCopies;
+    this.availableCopies = totalCopies;
+  }
+
+  /**
    * Expose persisted status.
    */
   public BookStatus getStatus() {
