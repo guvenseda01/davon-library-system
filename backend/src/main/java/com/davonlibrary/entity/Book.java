@@ -60,8 +60,12 @@ public class Book extends PanacheEntity {
    *
    * @param title the book title
    * @param author the book author
+   * @throws IllegalArgumentException if author is null
    */
   public Book(String title, Author author) {
+    if (author == null) {
+      throw new IllegalArgumentException("Author cannot be null");
+    }
     this.title = title;
     this.author = author;
     this.availableCopies = 1;
@@ -76,9 +80,12 @@ public class Book extends PanacheEntity {
    * @param isbn the ISBN
    * @param author the book author
    * @param totalCopies the total number of copies (must be non-negative, 0 is allowed)
-   * @throws IllegalArgumentException if totalCopies is negative
+   * @throws IllegalArgumentException if author is null or totalCopies is negative
    */
   public Book(String title, String isbn, Author author, int totalCopies) {
+    if (author == null) {
+      throw new IllegalArgumentException("Author cannot be null");
+    }
     if (totalCopies < 0) {
       throw new IllegalArgumentException("Total copies cannot be negative");
     }
