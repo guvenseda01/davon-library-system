@@ -56,6 +56,48 @@ public class Book extends PanacheEntity {
   public Book() {}
 
   /**
+   * Constructor with title and author (minimal information).
+   *
+   * @param title the book title
+   * @param author the book author
+   * @throws IllegalArgumentException if author is null
+   */
+  public Book(String title, Author author) {
+    if (author == null) {
+      throw new IllegalArgumentException("Author cannot be null");
+    }
+    this.title = title;
+    this.author = author;
+    this.availableCopies = 1;
+    this.totalCopies = 1;
+    this.status = BookStatus.AVAILABLE;
+  }
+
+  /**
+   * Constructor with title, ISBN, author, and total copies.
+   *
+   * @param title the book title
+   * @param isbn the ISBN
+   * @param author the book author
+   * @param totalCopies the total number of copies (must be non-negative, 0 is allowed)
+   * @throws IllegalArgumentException if author is null or totalCopies is negative
+   */
+  public Book(String title, String isbn, Author author, int totalCopies) {
+    if (author == null) {
+      throw new IllegalArgumentException("Author cannot be null");
+    }
+    if (totalCopies < 0) {
+      throw new IllegalArgumentException("Total copies cannot be negative");
+    }
+    this.title = title;
+    this.isbn = isbn;
+    this.author = author;
+    this.totalCopies = totalCopies;
+    this.availableCopies = totalCopies;
+    this.status = totalCopies > 0 ? BookStatus.AVAILABLE : BookStatus.UNAVAILABLE;
+  }
+
+  /**
    * Expose persisted status.
    */
   public BookStatus getStatus() {
